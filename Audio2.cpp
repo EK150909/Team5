@@ -1,9 +1,9 @@
 //=============================================================================
 //
-// ƒTƒEƒ“ƒhˆ— [XAudio2.cpp]
+// ã‚µã‚¦ãƒ³ãƒ‰å‡¦ç† [XAudio2.cpp]
 //
 //=============================================================================
-//Œx”ñ•\Ž¦
+//è­¦å‘Šéžè¡¨ç¤º
 #pragma warning(disable : 4005)
 #pragma warning(disable : 4838)
 
@@ -11,30 +11,30 @@
 
 #pragma comment(lib,"xaudio2.lib")
 
-// ƒpƒ‰ƒ[ƒ^\‘¢‘Ì
+// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ§‹é€ ä½“
 typedef struct
 {
-	LPCSTR filename;	// ‰¹ºƒtƒ@ƒCƒ‹‚Ü‚Å‚ÌƒpƒX‚ðÝ’è
-	bool bLoop;			// true‚Åƒ‹[ƒvB’ÊíBGM‚ÍtureASE‚ÍfalseB
+	LPCSTR filename;	// éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«ã¾ã§ã®ãƒ‘ã‚¹ã‚’è¨­å®š
+	bool bLoop;			// trueã§ãƒ«ãƒ¼ãƒ—ã€‚é€šå¸¸BGMã¯tureã€SEã¯falseã€‚
 } PARAM;
 
 PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"Assets/BGM/Title.wav",true},		//ƒ^ƒCƒgƒ‹BGM
-	{"Assets/BGM/GameMainBGM.wav",true},//ƒQ[ƒ€ƒƒCƒ“BGM
-	{"Assets/BGM/Result.wav",true},		//ƒŠƒUƒ‹ƒgBGM
-	{"Assets/BGM/ModeSelect.wav",true},	//ƒ‚[ƒhƒZƒŒƒNƒgBGM
-	{"Assets/BGM/Ranking.wav",true},	//ƒ‰ƒ“ƒLƒ“ƒOBGM
-	{"Assets/BGM/Training.wav",true},	//ƒgƒŒ[ƒjƒ“ƒOBGM
-	{"Assets/BGM/Charge.wav",true},		//ƒ`ƒƒ[ƒW
+	{"Assets/BGM/Title.wav",true},		//ã‚¿ã‚¤ãƒˆãƒ«BGM
+	{"Assets/BGM/GameMainBGM.wav",true},//ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³BGM
+	{"Assets/BGM/Result.wav",true},		//ãƒªã‚¶ãƒ«ãƒˆBGM
+	{"Assets/BGM/ModeSelect.wav",true},	//ãƒ¢ãƒ¼ãƒ‰ã‚»ãƒ¬ã‚¯ãƒˆBGM
+	{"Assets/BGM/Ranking.wav",true},	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°BGM
+	{"Assets/BGM/Training.wav",true},	//ãƒˆãƒ¬ãƒ¼ãƒ‹ãƒ³ã‚°BGM
+	{"Assets/BGM/Charge.wav",true},		//ãƒãƒ£ãƒ¼ã‚¸
 
-	{"Assets/SE/Select.wav",false},		//‘I‘ðSE
-	{"Assets/SE/BumperHit.wav",false},	//ƒoƒ“ƒp[‚É“–‚½‚Á‚½ŽžSE
-	{"Assets/SE/WallHit.wav",false},	//•Ç‚É“–‚½‚Á‚½ŽžSE
-	{"Assets/SE/EnemyHit.wav",false},	//“G‚É“–‚½‚Á‚½ŽžSE
-	{"Assets/SE/CursorTrans.wav",false},//ƒJ[ƒ\ƒ‹ˆÚ“®SE
-	{"Assets/SE/GameOver.wav",false},	//ƒQ[ƒ€ƒI[ƒo[SE
-	{"Assets/SE/Cannon.wav",false},		//‘å–CSE
+	{"Assets/SE/Select.wav",false},		//é¸æŠžSE
+	{"Assets/SE/BumperHit.wav",false},	//ãƒãƒ³ãƒ‘ãƒ¼ã«å½“ãŸã£ãŸæ™‚SE
+	{"Assets/SE/WallHit.wav",false},	//å£ã«å½“ãŸã£ãŸæ™‚SE
+	{"Assets/SE/EnemyHit.wav",false},	//æ•µã«å½“ãŸã£ãŸæ™‚SE
+	{"Assets/SE/CursorTrans.wav",false},//ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•SE
+	{"Assets/SE/GameOver.wav",false},	//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼SE
+	{"Assets/SE/Cannon.wav",false},		//å¤§ç ²SE
 };
 
 #ifdef _XBOX //Big-Endian
@@ -56,24 +56,24 @@ PARAM g_param[SOUND_LABEL_MAX] =
 
 
 //-----------------------------------------------------------------
-//    ƒOƒ[ƒoƒ‹•Ï”
+//    ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 //-----------------------------------------------------------------
 IXAudio2				*g_pXAudio2 = NULL;
 IXAudio2MasteringVoice	*g_pMasteringVoice = NULL;
 IXAudio2SourceVoice		*g_pSourceVoice[SOUND_LABEL_MAX];
 
-WAVEFORMATEXTENSIBLE	wfx[SOUND_LABEL_MAX];			// WAVƒtƒH[ƒ}ƒbƒg
+WAVEFORMATEXTENSIBLE	wfx[SOUND_LABEL_MAX];			// WAVãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ
 XAUDIO2_BUFFER			buffer[SOUND_LABEL_MAX];
 BYTE					*pDataBuffer[SOUND_LABEL_MAX];
 
 //-----------------------------------------------------------------
-//    ƒvƒƒgƒ^ƒCƒvéŒ¾
+//    ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 //-----------------------------------------------------------------
 HRESULT FindChunk(HANDLE, DWORD, DWORD&, DWORD&);
 HRESULT ReadChunkData(HANDLE , void* , DWORD , DWORD);
 
 //=============================================================================
-// ‰Šú‰»
+// åˆæœŸåŒ–
 //=============================================================================
 HRESULT InitSound()
 {
@@ -130,7 +130,7 @@ HRESULT InitSound()
 
 		CloseHandle(hFile);
 
-		// 	ƒTƒuƒ~ƒbƒgƒ{ƒCƒX‚Å—˜—p‚·‚éƒTƒuƒ~ƒbƒgƒoƒbƒtƒ@‚ÌÝ’è
+		// 	ã‚µãƒ–ãƒŸãƒƒãƒˆãƒœã‚¤ã‚¹ã§åˆ©ç”¨ã™ã‚‹ã‚µãƒ–ãƒŸãƒƒãƒˆãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 		buffer[i].AudioBytes = dwChunkSize;
 		buffer[i].pAudioData = pDataBuffer[i];
 		buffer[i].Flags = XAUDIO2_END_OF_STREAM;
@@ -145,7 +145,7 @@ HRESULT InitSound()
 }
 
 //=============================================================================
-// ŠJ•úˆ—
+// é–‹æ”¾å‡¦ç†
 //=============================================================================
 void UninitSound(void)
 {
@@ -155,7 +155,7 @@ void UninitSound(void)
 		{
 			g_pSourceVoice[i]->Stop( 0 );
 			g_pSourceVoice[i]->FlushSourceBuffers();
-			g_pSourceVoice[i]->DestroyVoice();			// ƒI[ƒfƒBƒIƒOƒ‰ƒt‚©‚çƒ\[ƒXƒ{ƒCƒX‚ðíœ
+			g_pSourceVoice[i]->DestroyVoice();			// ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚°ãƒ©ãƒ•ã‹ã‚‰ã‚½ãƒ¼ã‚¹ãƒœã‚¤ã‚¹ã‚’å‰Šé™¤
 			delete[] pDataBuffer[i];
 		}
 	}
@@ -168,23 +168,23 @@ void UninitSound(void)
 }
 
 //=============================================================================
-// Ä¶
+// å†ç”Ÿ
 //=============================================================================
 void PlaySound(SOUND_LABEL label,float volume)
 {
-	// ƒ\[ƒXƒ{ƒCƒXì¬
+	// ã‚½ãƒ¼ã‚¹ãƒœã‚¤ã‚¹ä½œæˆ
 	g_pXAudio2->CreateSourceVoice( &(g_pSourceVoice[(int)label]) , &(wfx[(int)label].Format) );
-	g_pSourceVoice[(int)label]->SubmitSourceBuffer( &(buffer[(int)label]) );	// ƒ{ƒCƒXƒLƒ…[‚ÉV‚µ‚¢ƒI[ƒfƒBƒIƒoƒbƒtƒ@[‚ð’Ç‰Á
+	g_pSourceVoice[(int)label]->SubmitSourceBuffer( &(buffer[(int)label]) );	// ãƒœã‚¤ã‚¹ã‚­ãƒ¥ãƒ¼ã«æ–°ã—ã„ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’è¿½åŠ 
 
-	// Ä¶
+	// å†ç”Ÿ
 	g_pSourceVoice[(int)label]->Start( 0 );
 
-	//‰¹—Ê‚ÌÝ’è
+	//éŸ³é‡ã®è¨­å®š
 	g_pSourceVoice[(int)label]->SetVolume(volume);
 }
 
 //=============================================================================
-// ’âŽ~
+// åœæ­¢
 //=============================================================================
 void StopSound(SOUND_LABEL label)
 {
@@ -199,14 +199,14 @@ void StopSound(SOUND_LABEL label)
 }
 
 //=============================================================================
-// ˆêŽž’âŽ~
+// ä¸€æ™‚åœæ­¢
 //=============================================================================
 void PauseSound(SOUND_LABEL label)
 {
-	// ‚²‚É‚å‚Á‚Æ‚·‚ê‚Î‰Â”\B
+	// ã”ã«ã‚‡ã£ã¨ã™ã‚Œã°å¯èƒ½ã€‚
 }
 //=============================================================================
-// ƒ†[ƒeƒBƒŠƒeƒBŠÖ”ŒQ
+// ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£é–¢æ•°ç¾¤
 //=============================================================================
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD & dwChunkSize, DWORD & dwChunkDataPosition)
 {
